@@ -1,13 +1,34 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-  //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-  // to see how IntelliJ IDEA suggests fixing it.
-  IO.println(String.format("Hello and welcome!"));
+import static java.lang.IO.println;
 
-  for (int i = 1; i <= 5; i++) {
-    //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-    // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-    IO.println("i = " + i);
-  }
-}
+void main(String[] args) {
+        String text = "ciao sono gay";
+        int[] shift = {2, 4, 6, 8};
+
+        String cifrata = cifraTraduci(text, shift, true);
+        String decifrata = cifraTraduci(cifrata, shift, false);
+
+        println("Cifrato: " + cifrata);
+        println("Decifrato: " + decifrata);
+    }
+
+
+    // mode = true (cifra) | mode = false (traduci)
+    static String cifraTraduci(String text, int[] shift, boolean mode) {
+        for (int i = 0; i < shift.length; i++) {
+            shift[i] = shift[i] % 94;
+            shift[i] = mode ? shift[i] : -shift[i];
+        }
+
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            int ascii = (int) c;
+
+            ascii = (ascii - 32 + shift[i % shift.length] + 94) % 94 + 32;
+
+            result.append((char) ascii);
+        }
+
+        return result.toString();
+    }
