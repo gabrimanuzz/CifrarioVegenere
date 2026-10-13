@@ -1,7 +1,9 @@
 import static java.lang.IO.println;
+import static java.lang.IO.readln;
 
 void main(String[] args) {
-        String text = "ciao sono gay";
+
+        String text = readln("inserire testo: ");
         int[] shift = {2, 4, 6, 8};
 
         String cifrata = cifraTraduci(text, shift, true);
